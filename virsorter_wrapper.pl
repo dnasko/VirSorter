@@ -1,8 +1,21 @@
 #!/usr/bin/env perl
 
+# MANUAL FOR virsorter_wrapper.pl
+
+=pod
+
+=head1 NAME
+
+virsorter_wrapper.pl -- run the VirSorter pipeline
+
 =head1 SYNOPSIS
 
-  wrapper_phage_contigs_sorter_iPlant.pl --fasta sequences.fa
+  virsorter_wrapper.pl --fasta /Path/to/input.fasta --dataset VirSorter --ncpu 8 [--cp custom] [--db Refseqdb] [--wdir /Path/to/workdir] [--virome 0]
+
+=head1 DESCRIPTION
+
+ This is the VirSorter wrapper script originally written by Big-Si, but tweeked to
+ run outside of a Docker container a little easier.
 
 Required Arguments:
 
@@ -44,7 +57,7 @@ my $choice_database = 1;
 my $tag_virome      = 0;
 my $custom_phage    = '';
 my $data_dir        = '/data';
-my $n_cpus          = 16;
+my $n_cpus          = 1;
 my $wdir            = cwd();
 
 GetOptions(
