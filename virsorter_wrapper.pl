@@ -17,24 +17,51 @@ virsorter_wrapper.pl -- run the VirSorter pipeline
  This is the VirSorter wrapper script originally written by Big-Si, but tweeked to
  run outside of a Docker container a little easier.
 
-Required Arguments:
+=head1 OPTIONS
 
-  -f|--fna       Fasta file of contigs
+=over 3
 
-Options: 
+=item B<-f, --fna>=FILENAME
 
-  -d|--dataset   Code dataset (DEFAULT "VIRSorter")
-  --cp           Custom phage sequence 
-  --db           Either "1" (DEFAULT Refseqdb) or "2" (Viromedb)
-  --wdir         Working directory (DEFAULT cwd)
-  --ncpu         Number of CPUs
-  --virome       Virome decontamination mode, for datasets mostly viral, force the use of generic metrics instead of calculated from the whole dataset. Set to 1 to use virome decontamination mode (default: 0)
+Input file in nucleotide FASTA format. (Required)
 
-  --help         Show help and exit
+=item B<-d, --dataset>=NAME
 
-=head1 DESCRIPTION
+Code dataset. (Default = "VIRSorter")
 
-Wrapper for detection of viral contigs
+=item B<--db>=INT
+
+Database, choices 1 (Refseqdb) or 2 (Viromedb). (Default = 1)
+
+=item B<--virome>=INT
+
+Virome decontamination mode, for datasets mostly viral. Force the use of generix metrics instead of calculated from the whole dataset. 1=On, 0=Off (Default=0)
+
+=item B<--wdir>=DIRNAME
+
+Working directory. (Default = cwd)
+
+=item B<--cp>=DIRNAME
+
+Custom phage sequence. Not sure what that is supposed to mean yet. (No default?)
+
+=item B<--data-dir>=DIRNAME
+
+Path to the data directory. (Default = "/data")
+
+=item B<--ncpu>=INT
+
+Number of CPUs to use. (Default = 1)
+
+=item B<-h, --help>
+
+Displays the usage message.  (Optional)
+
+=item B<-m, --manual>
+
+Displays full manual.  (Optional)
+
+=back
 
 =cut
 
@@ -50,19 +77,20 @@ use Getopt::Long 'GetOptions';
 use Pod::Usage;
 use Cwd 'cwd';
 
-my $help            = '';
+## ARGUMENTS WITH NO DEFAULT
+my ($input_file,$custom_phage,$help,$manual);
+
+## Arguments with defaults
 my $code_dataset    = 'VIRSorter';
-my $input_file      = '';
 my $choice_database = 1;
 my $tag_virome      = 0;
-my $custom_phage    = '';
 my $data_dir        = '/data';
 my $n_cpus          = 1;
 my $wdir            = cwd();
 
 GetOptions(
-   'f|fna=s'     => \$input_file,
-   'd|dataset:s' => \$code_dataset,
+   'f|fna=s'     => \$input_file,      ## Input FASTA file
+   'd|dataset:s' => \$code_dataset,    ## 
    'db:i'        => \$choice_database,
    'virome:i'    => \$tag_virome,
    'wdir:s'      => \$wdir,
@@ -70,19 +98,14 @@ GetOptions(
    'data-dir:s'  => \$data_dir,
    'ncpu:i'      => \$n_cpus,
    'h|help'      => \$help,
+   'm|manual'    => \$manual
 );
 
-if ($help) {
-    pod2usage();
-}
-
-unless ($input_file) {
-    pod2usage('Missing FASTA file');
-}
-
-if ($choice_database < 1 || $choice_database > 3) {
-    pod2usage('choice_database must be 1, 2, or 3');
-}
+# VALIDATE ARGS
+pod2usage(-verbose => 2)  if ($manual);
+pod2usage( {-exitval => 0, -verbose => 2, -output => \*STDERR} )  if ($help);
+pod2usage( -msg  => "\n\n ERROR! Required argument --fna not found.\n\n", -exitval => 2, -verbose => 1)  if (! $input_file );
+pod2usage( -msg  => "\n\n ERROR! --db must be 1, 2, or 3\n\n", -exitval => 2, -verbose => 1)  if ( $choice_database < 1 || $choice_database > 3 );
 
 say map { sprintf "%-15s: %s\n", @$_ } (
     ['Bin',           $Bin],
@@ -103,7 +126,7 @@ if ($tag_virome == 1) {
 
 my $path_hmmsearch     = which('hmmsearch') or die "Missing hmmsearch\n";
 my $path_blastp        = which('blastp')    or die "Missing blastp\n";
-my $script_dir         = catdir($Bin, 'Scripts');
+my $script_dir         = catdir($Bin, 'scripts');
 my $dir_Phage_genes    = catdir($data_dir,'Phage_gene_catalog');
 my $readme_file        = catfile($data_dir, 'VirSorter_Readme.txt');
 my $ref_phage_clusters = catfile($data_dir,

@@ -1,6 +1,10 @@
 # VirSorter
 
-Source code of the VirSorter App, available on CyVerse (https://de.iplantcollaborative.org/de/)
+This is **not** the Source code of the VirSorter App, (which is available on [CyVerse](https://de.iplantcollaborative.org/de/)). This is a forked version of the VirSorter repository merely cleaned up a touch to run easier outside of Docker. If you would like to check out the real VirSorter App simply head over to [Big Simon's repo](https://github.com/simroux/VirSorter).
+
+The inspiration for me to fork this repository was to inforporate it into the [Baby Virome pipeline](https://github.com/dnasko/baby_virome), a lightweight and (somewhat) scaleable virome (viral metagenome) analysis pipeline.
+
+The only modifications you'll see in this repository are meant to help the VirSorter code base improve in running time and commandline documentation (I hope). Oh, and to remove all of the Docker-related features and documentation. It's really difficult to run Docker on Linux systems at your instutitution or company because they won't dish out those sweet sweet sudo privileges (even if you have a PhD). And yeah you can run Docker without sudo, but good luck getting your IT department on board with that.
 
 # Publication
 
