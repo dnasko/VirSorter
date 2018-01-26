@@ -16,7 +16,7 @@ The following programs need to be installed in a directory that is in your Bash 
 - [MCL](http://micans.org/mcl/)
 - [MetaGene Annotator](http://metagene.nig.ac.jp/metagene/download_mga.html)
 - [MUSCLE](http://www.drive5.com/muscle/)
-- [NCBI BLAST+](ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/)
+- [NCBI BLAST+](http://ncbi.nlm.nih.gov/blast/)
 
 ### Perl Modules
 
