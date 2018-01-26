@@ -20,6 +20,7 @@ The following programs need to be installed in a directory that is in your Bash 
 
 ### Perl Modules
 
+- File::Which
 - Capture::Tiny
 - Bio::Location::Simple
 - Bio::Location::Split
@@ -30,6 +31,7 @@ The following programs need to be installed in a directory that is in your Bash 
 You can install these modules pretty easy with cpanm (cpan minus), if it's installed:
 
 ```bash
+cpanm File::Which
 cpanm Capture::Tiny
 cpanm Bio::Perl
 ```

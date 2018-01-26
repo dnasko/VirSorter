@@ -3,6 +3,11 @@ set -e
 
 ## Check for Perl modules...
 echo -e "\n Checking for Perl modules"
+
+echo -n " File::Which ................ "
+perl -e 'use File::Which;'
+echo "PASS"
+
 echo -n " Capture::Tiny .............. "
 perl -e 'use Capture::Tiny;';
 echo "PASS"
