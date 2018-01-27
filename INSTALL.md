@@ -16,7 +16,7 @@ The following programs need to be installed in a directory that is in your Bash 
 - [MCL](http://micans.org/mcl/)
 - [MetaGene Annotator](http://metagene.nig.ac.jp/metagene/download_mga.html)
 - [MUSCLE](http://www.drive5.com/muscle/)
-- [NCBI BLAST+](http://ncbi.nlm.nih.gov/blast/)
+- [NCBI BLAST+](http://ncbi.nlm.nih.gov/blast/), specifically `blastp`
 
 ### Perl Modules
 
@@ -28,7 +28,7 @@ The following programs need to be installed in a directory that is in your Bash 
 - Bio::SeqFeature::Generic
 - Bio::SeqIO
 
-You can install these modules pretty easy with cpanm (cpan minus), if it's installed:
+You can install these modules pretty easy with `cpanm` ([cpanminus](http://search.cpan.org/~miyagawa/App-cpanminus-1.7043/lib/App/cpanminus.pm)), if it's installed:
 
 ```bash
 cpanm File::Which
