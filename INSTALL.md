@@ -40,4 +40,4 @@ cpanm Bio::Perl
 
 Working on how this will be distributed. It's a pretty big TAR ball (3.7 GB).
 
-*Rev DJN 25Jan2018*
+*Rev DJN 26Jan2018*
