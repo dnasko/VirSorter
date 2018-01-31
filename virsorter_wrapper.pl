@@ -10,7 +10,7 @@ virsorter_wrapper.pl -- run the VirSorter pipeline
 
 =head1 SYNOPSIS
 
-  virsorter_wrapper.pl --fasta /Path/to/input.fasta --dataset VirSorter --ncpu 8 [--cp custom] [--db Refseqdb] [--wdir /Path/to/workdir] [--virome 0]
+  virsorter_wrapper.pl --fna /Path/to/input.fasta --dataset VirSorter --ncpu 8 [--cp custom] [--db Refseqdb] [--wdir /Path/to/workdir] [--virome 0]
 
 =head1 DESCRIPTION
 
